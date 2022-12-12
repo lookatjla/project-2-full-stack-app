@@ -27,12 +27,33 @@ app.post('/recipes', (req, res) => {
     });
 });
 
+
+
+
 // index route
 app.get('/recipes', (req, res) => {
     Recipe.find({}, (error, foundRecipe) => {
         res.send(foundRecipe)
     })
-})
+});
+
+
+// show route
+app.get('/recipes/:id', (req, res) => {
+    Recipe.findById(req.params.id, (error, foundRecipe) => {
+        res.send(foundRecipe)
+    })
+});
+
+
+// delete route
+app.delete('/recipes/:id', (req, res) => {
+    Recipe.findByIdAndDelete(req.params.id, (error, deletedRecipe) => {
+        console.log('recipe has been deleted')
+        res.send({ success: true })
+    })
+});
+
 
 
 // database connection error/success
