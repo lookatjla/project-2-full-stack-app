@@ -15,12 +15,25 @@ mongoose.connect(DATABASE_URL, {
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
+
 // CRUD - Create
 app.post('/recipes', (req, res) => {
     Recipe.create(req.body, (error, createdRecipe) => {
+        if (error) {
+            res.send('error')
+            return
+        }
         res.send(createdRecipe);
     });
 });
+
+// index route
+app.get('/recipes', (req, res) => {
+    Recipe.find({}, (error, foundRecipe) => {
+        res.send(foundRecipe)
+    })
+})
+
 
 // database connection error/success
 db.on('error', (err) => console.log(err.message + ' is mongo not running?'));
