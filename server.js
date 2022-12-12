@@ -16,7 +16,7 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 
 
-// CRUD - Create
+// create route
 app.post('/recipes', (req, res) => {
     Recipe.create(req.body, (error, createdRecipe) => {
         if (error) {
@@ -46,6 +46,20 @@ app.get('/recipes/:id', (req, res) => {
 });
 
 
+// update route
+app.put('/recipes/:id', (req, res) => {
+    Recipe.findByIdAndUpdate(
+        req.params.id,
+        req.body,
+        { new: true }, // makes sure the updated tweet is the actual new tweet, otherwise tweet will not update
+        (error, updatedRecipe) => {
+            console.log('recipe has been updated')
+            res.send(updatedRecipe)
+        }
+    )
+})
+
+
 // delete route
 app.delete('/recipes/:id', (req, res) => {
     Recipe.findByIdAndDelete(req.params.id, (error, deletedRecipe) => {
@@ -53,6 +67,8 @@ app.delete('/recipes/:id', (req, res) => {
         res.send({ success: true })
     })
 });
+
+
 
 
 
