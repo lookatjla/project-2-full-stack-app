@@ -1,14 +1,14 @@
-const mongoose = require('mongoose');
-const Schema = mongoose.Schema
+// const mongoose = require('mongoose');
+// const Schema = mongoose.Schema
 
-// create a recipe schema using the Schema variable
-const recipeSchema = new Schema({
-    title: String,
-    source: String,
-    ingredients: String,
-    instructions: String,
-});
+// // create a recipe schema using the Schema variable
+// const recipeSchema = new Schema({
+//     title: String,
+//     source: String,
+//     ingredients: String,
+//     instructions: String,
+// });
 
-const Recipe = mongoose.model('Recipe', recipeSchema)
+// const Recipe = mongoose.model('Recipe', recipeSchema)
 
-module.exports = Recipe
+// module.exports = Recipe
