@@ -1,6 +1,7 @@
 const express = require('express');
 const app = express();
 const mongoose = require('mongoose');
+const Recipe = require('./models/homemade');
 
 const DATABASE_URL = 'mongodb+srv://lookatjla:jAshDaGod3ss!@sei.pwit4m3.mongodb.net/homemade?retryWrites=true&w=majority'
 
@@ -10,6 +11,16 @@ mongoose.connect(DATABASE_URL, {
     useNewUrlParser: true,
     useUnifiedTopology: true
 }); // tells our mongoose to connect to our database
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: false }));
+
+// CRUD - Create
+app.post('/recipes', (req, res) => {
+    Recipe.create(req.body, (error, createdRecipe) => {
+        res.send(createdRecipe);
+    });
+});
 
 // database connection error/success
 db.on('error', (err) => console.log(err.message + ' is mongo not running?'));
