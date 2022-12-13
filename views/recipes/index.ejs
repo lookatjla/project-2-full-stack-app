@@ -6,21 +6,16 @@
         <%- include("../partials/header.ejs") %>
             <main>
                 <div>
-
-                    <article>
-                        <h2>
-                            <%= Recipe.title %>
-                        </h2>
-                        <h3>
-                            <%= Recipe.ingredients %>
-                        </h3>
-                        <a href="/recipes/<%= Recipe._id %>/edit"><button>Edit</button></a>
-                        <form action="/recipes/<%= Recipe._id %>?_method=DELETE" method="POST">
-                            <input type="submit" value="Delete" />
-                        </form>
-                        <a href="/recipes/"><button>Back to Main</button></a>
-                    </article>
-
+                    <a href="/recipes/new/"><button>Create a New Recipe</button></a>
+                    <% for (recipe of recipes) { %>
+                        <article>
+                            <a href="/recipes/<%= recipe._id %>">
+                                <h2>
+                                    <%= recipe.title %>
+                                </h2>
+                            </a>
+                        </article>
+                        <% } %>
                 </div>
             </main>
     </body>

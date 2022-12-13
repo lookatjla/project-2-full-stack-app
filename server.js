@@ -90,11 +90,10 @@ app.get('/recipes/seed', (req, res) => {
 app.get('/recipes', (req, res) => {
     // get all recipes from mongo and send them back
     Recipe.find({})
-        .then((fruits) => {
+        .then((recipes) => {
             // res.json(recipes)
-            res.render('recipes/index.ejs', { Recipe })
+            res.render('recipes/index.ejs', { recipes })
         })
-        .catch(err => console.log(err))
 })
 
 // new route
@@ -106,7 +105,7 @@ app.get("/recipes/new", (req, res) => {
 // create route
 app.post("/recipes", (req, res) => {
     // create the new recipe
-    Recipe.create(req.body, (err, recipe) => {
+    Recipe.create(req.body, (err, recipes) => {
         // redirect the user back to the main recipes page after recipe created
         res.redirect("/recipes")
     })
